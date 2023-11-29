@@ -1,5 +1,6 @@
 package com.patriciarocha.pharmapdvapi.model;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -27,7 +28,7 @@ public class Farmacia {
 
     private String celular;
 
+    @Embedded
     private Endereco endereco;
-
 
 }
