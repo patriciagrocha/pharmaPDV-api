@@ -1,5 +1,6 @@
 package com.patriciarocha.pharmapdvapi.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

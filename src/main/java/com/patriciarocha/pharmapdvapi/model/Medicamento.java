@@ -21,6 +21,8 @@ public class Medicamento {
     private String dosagem;
     private String descricao;
     private Float preco;
+
+
     @Enumerated(EnumType.STRING)
     private TipoMedicamento tipo;
 
