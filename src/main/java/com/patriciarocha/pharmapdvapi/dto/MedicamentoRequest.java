@@ -1,11 +1,10 @@
 package com.patriciarocha.pharmapdvapi.dto;
 
-import com.patriciarocha.pharmapdvapi.model.TipoMedicamento;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 public class MedicamentoRequest {
 
     @NotNull(message = "Campo obrigatório: Número de registro")
@@ -27,6 +26,5 @@ public class MedicamentoRequest {
     private Float preco;
 
     @NotEmpty(message = "Campo obrigatório!")
-    @Enumerated(EnumType.STRING)
-    private TipoMedicamento tipo;
+    private String tipo;
 }

@@ -4,6 +4,7 @@ package com.patriciarocha.pharmapdvapi.controller;
 import com.patriciarocha.pharmapdvapi.dto.MedicamentoRequest;
 import com.patriciarocha.pharmapdvapi.dto.MedicamentoResponse;
 import com.patriciarocha.pharmapdvapi.model.Medicamento;
+import com.patriciarocha.pharmapdvapi.service.MedicamentoService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class MedicamentoController {
 
     @Autowired
     private ModelMapper mapper;
+
+    public MedicamentoController() {
+    }
 
     @GetMapping
     public ResponseEntity<List<MedicamentoResponse>> consultar() {
