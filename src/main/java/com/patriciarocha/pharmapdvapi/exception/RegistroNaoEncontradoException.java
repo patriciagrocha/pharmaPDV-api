@@ -23,7 +23,7 @@ public class RegistroNaoEncontradoException extends RuntimeException {
     public String getMessage() {
         if (nome == null || identificador == null)
             return null;
-        return String.format("Registro '%s' nao encontrado com identificador '%s'", nome, identificador);
+        return String.format(" %s não encontrado com identificador '%s'", nome, identificador);
     }
 
 }
