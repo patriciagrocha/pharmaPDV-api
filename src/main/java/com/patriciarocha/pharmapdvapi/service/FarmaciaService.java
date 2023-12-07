@@ -1,0 +1,24 @@
+package com.patriciarocha.pharmapdvapi.service;
+
+import com.patriciarocha.pharmapdvapi.model.Farmacia;
+import com.patriciarocha.pharmapdvapi.model.Medicamento;
+import com.patriciarocha.pharmapdvapi.repository.FarmaciaRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class FarmaciaService {
+
+    @Autowired
+    private FarmaciaRepository repo;
+
+    @Autowired
+    private ModelMapper mapper;
+
+    public List<Farmacia> consultar(){
+        return repo.findAll();
+    }
+}
