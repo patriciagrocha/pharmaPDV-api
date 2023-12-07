@@ -3,15 +3,16 @@ package com.patriciarocha.pharmapdvapi.service;
 import com.patriciarocha.pharmapdvapi.exception.RegistroJaExisteException;
 import com.patriciarocha.pharmapdvapi.exception.RegistroNaoEncontradoException;
 import com.patriciarocha.pharmapdvapi.model.Farmacia;
-import com.patriciarocha.pharmapdvapi.model.Medicamento;
 import com.patriciarocha.pharmapdvapi.repository.FarmaciaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 @Service
+@Validated
 public class FarmaciaService {
 
     @Autowired

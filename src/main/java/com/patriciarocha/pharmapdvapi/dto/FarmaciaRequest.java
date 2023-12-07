@@ -2,6 +2,7 @@ package com.patriciarocha.pharmapdvapi.dto;
 
 import com.patriciarocha.pharmapdvapi.model.Endereco;
 import jakarta.persistence.Embedded;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class FarmaciaRequest {
     private String celular;
 
     @Embedded
+    @Valid
     private Endereco endereco;
 
 }

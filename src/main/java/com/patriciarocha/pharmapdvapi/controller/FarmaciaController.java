@@ -2,10 +2,7 @@ package com.patriciarocha.pharmapdvapi.controller;
 
 import com.patriciarocha.pharmapdvapi.dto.FarmaciaRequest;
 import com.patriciarocha.pharmapdvapi.dto.FarmaciaResponse;
-import com.patriciarocha.pharmapdvapi.dto.MedicamentoRequest;
-import com.patriciarocha.pharmapdvapi.dto.MedicamentoResponse;
 import com.patriciarocha.pharmapdvapi.model.Farmacia;
-import com.patriciarocha.pharmapdvapi.model.Medicamento;
 import com.patriciarocha.pharmapdvapi.service.FarmaciaService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
