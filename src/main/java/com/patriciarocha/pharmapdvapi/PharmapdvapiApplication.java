@@ -18,4 +18,5 @@ public class PharmapdvapiApplication {
 		mapper.getConfiguration().setSkipNullEnabled(true);
 		return mapper;
 	}
+
 }

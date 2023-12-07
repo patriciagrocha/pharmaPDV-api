@@ -20,8 +20,7 @@ public class Medicamento {
     private String laboratorio;
     private String dosagem;
     private String descricao;
-    private Float preco;
-
+    private Double preco;
 
     @Enumerated(EnumType.STRING)
     private TipoMedicamento tipo;
