@@ -13,11 +13,10 @@ public class PharmapdvapiApplication {
 	}
 
 	@Bean
-	public ModelMapper getModelMapper() {
+	public ModelMapper getModelMapper(){
 		var mapper = new ModelMapper();
 		mapper.getConfiguration().setSkipNullEnabled(true);
 		return mapper;
 	}
-
 
 }
