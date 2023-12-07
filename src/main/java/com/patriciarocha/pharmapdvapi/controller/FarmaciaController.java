@@ -1,18 +1,19 @@
 package com.patriciarocha.pharmapdvapi.controller;
 
+import com.patriciarocha.pharmapdvapi.dto.FarmaciaRequest;
 import com.patriciarocha.pharmapdvapi.dto.FarmaciaResponse;
+import com.patriciarocha.pharmapdvapi.dto.MedicamentoRequest;
 import com.patriciarocha.pharmapdvapi.dto.MedicamentoResponse;
 import com.patriciarocha.pharmapdvapi.model.Farmacia;
 import com.patriciarocha.pharmapdvapi.model.Medicamento;
 import com.patriciarocha.pharmapdvapi.service.FarmaciaService;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,14 @@ public class FarmaciaController {
         Farmacia farmacia = service.consultar(cnpj);
         FarmaciaResponse resp = mapper.map(farmacia, FarmaciaResponse.class);
         return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping
+    public ResponseEntity<FarmaciaResponse> criar(@RequestBody @Valid FarmaciaRequest request) {
+        var farmacia = mapper.map(request, Farmacia.class);
+        farmacia = service.salvar(farmacia);
+        var resp = mapper.map(farmacia, FarmaciaResponse.class);
+        return ResponseEntity.created(URI.create(farmacia.getCnpj().toString())).body(resp);
     }
 
 }

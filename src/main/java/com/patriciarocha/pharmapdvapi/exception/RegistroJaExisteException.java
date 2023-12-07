@@ -23,7 +23,7 @@ public class RegistroJaExisteException extends RuntimeException {
     public String getMessage() {
         if (nome == null || identificador == null)
             return null;
-        return String.format(" '%s' já cadastrado com identificador '%s'", nome, identificador);
+        return String.format("Registro '%s' já cadastrado com identificador '%s'", nome, identificador);
     }
 
 }

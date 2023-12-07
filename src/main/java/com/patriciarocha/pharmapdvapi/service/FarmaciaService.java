@@ -1,5 +1,6 @@
 package com.patriciarocha.pharmapdvapi.service;
 
+import com.patriciarocha.pharmapdvapi.exception.RegistroJaExisteException;
 import com.patriciarocha.pharmapdvapi.exception.RegistroNaoEncontradoException;
 import com.patriciarocha.pharmapdvapi.model.Farmacia;
 import com.patriciarocha.pharmapdvapi.model.Medicamento;
@@ -26,6 +27,14 @@ public class FarmaciaService {
     public Farmacia consultar(Long cnpj){
         return repo.findById(cnpj)
                 .orElseThrow(() -> new RegistroNaoEncontradoException("Registro", cnpj));
+    }
+
+    public Farmacia salvar(Farmacia farmacia){
+        boolean exist = repo.existsById(farmacia.getCnpj());
+        if(exist)
+            throw new RegistroJaExisteException("Farmácia", farmacia.getCnpj());
+        farmacia = repo.save(farmacia);
+        return farmacia;
     }
 
 
