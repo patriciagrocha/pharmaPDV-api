@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/estoque")
@@ -25,12 +26,12 @@ public class EstoqueController {
     @Autowired
     private ModelMapper mapper;
 
-    
+
     @GetMapping
     public ResponseEntity<List<EstoqueResponse>> consultar() {
-        List<Estoque> estoques = service.consultar();
+        List<Estoque> estoqueList = service.consultar();
         List<EstoqueResponse> resp = new ArrayList<>();
-        for (Estoque estoque : estoques) {
+        for (Estoque estoque : estoqueList) {
             EstoqueResponse estoqueResp = mapper.map(estoque, EstoqueResponse.class);
             resp.add(estoqueResp);
         }
@@ -38,12 +39,10 @@ public class EstoqueController {
     }
     @GetMapping("/{cnpj}")
     public ResponseEntity<List<EstoqueResponse>> consultar(@PathVariable("cnpj") Long cnpj) {
-        List<Estoque> estoques = service.consultar(cnpj);
-        List<EstoqueResponse> resp = new ArrayList<>();
-        for (Estoque estoque : estoques) {
-            EstoqueResponse estoqueResp = mapper.map(estoque, EstoqueResponse.class);
-            resp.add(estoqueResp);
-        }
+        List<EstoqueResponse> estoques = service.consultar(cnpj);
+        List<EstoqueResponse> resp = estoques.stream()
+                .map(estoque -> mapper.map(estoque, EstoqueResponse.class))
+                .collect(Collectors.toList());
         return ResponseEntity.ok(resp);
     }
 
