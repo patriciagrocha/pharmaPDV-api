@@ -49,11 +49,9 @@ public class EstoqueController {
     @PostMapping
     public ResponseEntity<EstoqueResponse> criar(@RequestBody @Valid EstoqueRequest request) {
         Estoque estoque = mapper.map(request, Estoque.class);
-        estoque.setDataAtualizacao(LocalDateTime.now());
         estoque = service.salvar(estoque);
 
         var resp = mapper.map(estoque, EstoqueResponse.class);
-        resp.setDataAtualizacao(estoque.getDataAtualizacao());
         return ResponseEntity.ok(resp);
         //return ResponseEntity.created(URI.create(estoque.getCnpj().toString())).body(resp);
 

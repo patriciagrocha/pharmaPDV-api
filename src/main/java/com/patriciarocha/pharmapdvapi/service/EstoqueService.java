@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,13 +57,11 @@ public class EstoqueService {
         Integer nroRegistro = estoque.getNroRegistro();
         Medicamento medicamento = medicamentoService.consultar(nroRegistro);
 
-        if (!repo.existsByCnpjAndNroRegistro(estoque.getCnpj(), estoque.getNroRegistro())){
-            estoque = repo.save(estoque);
-            return estoque;
+        if (repo.existsByCnpjAndNroRegistro(cnpj, nroRegistro)){
+            Estoque estoqueBD = repo.findByCnpjAndNroRegistro(cnpj, nroRegistro);
+            estoque.setQuantidade(estoqueBD.getQuantidade() + estoque.getQuantidade());
         }
-
-        Estoque estoqueBD = repo.findByCnpjAndNroRegistro(cnpj, nroRegistro);
-        estoque.setQuantidade(estoqueBD.getQuantidade() + estoque.getQuantidade());
+        estoque.setDataAtualizacao(LocalDateTime.now());
         estoque = repo.save(estoque);
         return estoque;
 
