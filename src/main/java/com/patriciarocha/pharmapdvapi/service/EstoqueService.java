@@ -3,6 +3,7 @@ package com.patriciarocha.pharmapdvapi.service;
 import com.patriciarocha.pharmapdvapi.dto.EstoqueResponse;
 import com.patriciarocha.pharmapdvapi.exception.RegistroNaoEncontradoException;
 import com.patriciarocha.pharmapdvapi.model.Estoque;
+import com.patriciarocha.pharmapdvapi.model.Farmacia;
 import com.patriciarocha.pharmapdvapi.model.Medicamento;
 import com.patriciarocha.pharmapdvapi.repository.EstoqueRepository;
 import org.modelmapper.ModelMapper;
@@ -45,6 +46,26 @@ public class EstoqueService {
             estoqueRespList.add(estoqueResp);
         }
         return estoqueRespList;
+    }
+
+    public Estoque salvar(Estoque estoque) {
+
+        Long cnpj = estoque.getCnpj();
+        Farmacia farmacia = farmaciaService.consultar(cnpj);
+
+        Integer nroRegistro = estoque.getNroRegistro();
+        Medicamento medicamento = medicamentoService.consultar(nroRegistro);
+
+        if (!repo.existsByCnpjAndNroRegistro(estoque.getCnpj(), estoque.getNroRegistro())){
+            estoque = repo.save(estoque);
+            return estoque;
+        }
+
+        Estoque estoqueBD = repo.findByCnpjAndNroRegistro(cnpj, nroRegistro);
+        estoque.setQuantidade(estoqueBD.getQuantidade() + estoque.getQuantidade());
+        estoque = repo.save(estoque);
+        return estoque;
+
     }
 }
 

@@ -1,17 +1,17 @@
 package com.patriciarocha.pharmapdvapi.controller;
 
 
+import com.patriciarocha.pharmapdvapi.dto.EstoqueRequest;
 import com.patriciarocha.pharmapdvapi.dto.EstoqueResponse;
 import com.patriciarocha.pharmapdvapi.model.Estoque;
 import com.patriciarocha.pharmapdvapi.service.EstoqueService;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,6 +44,19 @@ public class EstoqueController {
                 .map(estoque -> mapper.map(estoque, EstoqueResponse.class))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping
+    public ResponseEntity<EstoqueResponse> criar(@RequestBody @Valid EstoqueRequest request) {
+        Estoque estoque = mapper.map(request, Estoque.class);
+        estoque.setDataAtualizacao(LocalDateTime.now());
+        estoque = service.salvar(estoque);
+
+        var resp = mapper.map(estoque, EstoqueResponse.class);
+        resp.setDataAtualizacao(estoque.getDataAtualizacao());
+        return ResponseEntity.ok(resp);
+        //return ResponseEntity.created(URI.create(estoque.getCnpj().toString())).body(resp);
+
     }
 
 

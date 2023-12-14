@@ -26,7 +26,7 @@ public class MedicamentoService {
 
     public Medicamento consultar(Integer nroRegistro){
         return repo.findById(nroRegistro)
-                .orElseThrow(() -> new RegistroNaoEncontradoException("Registro", nroRegistro));
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Medicamento", nroRegistro));
     }
 
     public Medicamento salvar(Medicamento medicamento){

@@ -1,7 +1,6 @@
 package com.patriciarocha.pharmapdvapi.dto;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 
@@ -15,7 +14,9 @@ public class EstoqueRequest {
     @NotNull(message = "Campo obrigatório!")
     private Integer nroRegistro;
 
-    @Min(value = 1, message = "A quantidade deve ser um número positivo maior que zero")
+    @NotNull(message = "Campo obrigatório!" )
+    @Positive(message = "A quantidade deve ser um número positivo maior que zero")
+    @Digits(integer = 10, fraction = 0, message = "O número deve ter no máximo 10 dígitos")
     private Integer quantidade;
 
 }

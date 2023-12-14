@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class EstoqueResponse {
 
+    private Long cnpj;
     private Integer nroRegistro;
     private String nome;
     private Integer quantidade;
     private LocalDateTime dataAtualizacao;
-
 }
