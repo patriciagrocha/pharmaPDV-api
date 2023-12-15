@@ -3,6 +3,8 @@ package com.patriciarocha.pharmapdvapi.controller;
 
 import com.patriciarocha.pharmapdvapi.dto.EstoqueRequest;
 import com.patriciarocha.pharmapdvapi.dto.EstoqueResponse;
+import com.patriciarocha.pharmapdvapi.dto.EstoqueTransferenciaRequest;
+import com.patriciarocha.pharmapdvapi.dto.EstoqueTransferenciaResponse;
 import com.patriciarocha.pharmapdvapi.model.Estoque;
 import com.patriciarocha.pharmapdvapi.service.EstoqueService;
 import jakarta.validation.Valid;
@@ -11,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,6 +65,10 @@ public class EstoqueController {
         var resp = mapper.map(estoque, EstoqueResponse.class);
         return ResponseEntity.ok(resp);
     }
-
+    @PutMapping
+    public ResponseEntity<EstoqueTransferenciaResponse> atualizar(@RequestBody @Valid EstoqueTransferenciaRequest request) {
+        var estoque = service.atualizar(request);
+        return ResponseEntity.ok(estoque);
+    }
 
 }
