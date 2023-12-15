@@ -1,6 +1,7 @@
 package com.patriciarocha.pharmapdvapi.service;
 
 import com.patriciarocha.pharmapdvapi.dto.EstoqueResponse;
+import com.patriciarocha.pharmapdvapi.exception.QuantidadeIndisponivelException;
 import com.patriciarocha.pharmapdvapi.exception.RegistroNaoEncontradoException;
 import com.patriciarocha.pharmapdvapi.model.Estoque;
 import com.patriciarocha.pharmapdvapi.model.Farmacia;
@@ -63,6 +64,31 @@ public class EstoqueService {
         }
         estoque.setDataAtualizacao(LocalDateTime.now());
         estoque = repo.save(estoque);
+        return estoque;
+
+    }
+    public Estoque excluir(Estoque estoque) {
+
+        Long cnpj = estoque.getCnpj();
+        Farmacia farmacia = farmaciaService.consultar(cnpj);
+        Integer nroRegistro = estoque.getNroRegistro();
+        Medicamento medicamento = medicamentoService.consultar(nroRegistro);
+
+        if (repo.existsByCnpjAndNroRegistro(cnpj, nroRegistro)){
+            Estoque estoqueBD = repo.findByCnpjAndNroRegistro(cnpj, nroRegistro);
+            var estoqueQtdBD = estoqueBD.getQuantidade();
+
+            if(estoqueQtdBD < estoque.getQuantidade())
+                throw new QuantidadeIndisponivelException("Estoque", estoque.getQuantidade());
+
+            estoque.setQuantidade(estoqueBD.getQuantidade() - estoque.getQuantidade());
+            estoque.setDataAtualizacao(LocalDateTime.now());
+            estoque = repo.save(estoque);
+        }
+
+        if(estoque.getQuantidade() == 0)
+            repo.delete(estoque);
+
         return estoque;
 
     }

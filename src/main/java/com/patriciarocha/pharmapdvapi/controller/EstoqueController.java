@@ -57,5 +57,13 @@ public class EstoqueController {
 
     }
 
+    @DeleteMapping
+    public ResponseEntity<EstoqueResponse> excluir(@RequestBody @Valid EstoqueRequest request){
+        Estoque estoque = mapper.map(request, Estoque.class);
+        estoque = service.excluir(estoque);
+        var resp = mapper.map(estoque, EstoqueResponse.class);
+        return ResponseEntity.ok(resp);
+    }
+
 
 }
