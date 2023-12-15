@@ -52,46 +52,36 @@ public class EstoqueService {
     }
 
     public Estoque salvar(Estoque estoque) {
+        farmaciaService.consultar(estoque.getCnpj());
+        medicamentoService.consultar(estoque.getNroRegistro());
 
-        Long cnpj = estoque.getCnpj();
-        Farmacia farmacia = farmaciaService.consultar(cnpj);
-
-        Integer nroRegistro = estoque.getNroRegistro();
-        Medicamento medicamento = medicamentoService.consultar(nroRegistro);
-
-        if (repo.existsByCnpjAndNroRegistro(cnpj, nroRegistro)){
-            Estoque estoqueBD = repo.findByCnpjAndNroRegistro(cnpj, nroRegistro);
+        if (repo.existsByCnpjAndNroRegistro(estoque.getCnpj(), estoque.getNroRegistro())){
+            Estoque estoqueBD = repo.findByCnpjAndNroRegistro(estoque.getCnpj(), estoque.getNroRegistro());
             estoque.setQuantidade(estoqueBD.getQuantidade() + estoque.getQuantidade());
         }
         estoque.setDataAtualizacao(LocalDateTime.now());
         estoque = repo.save(estoque);
-        return estoque;
 
+        return estoque;
     }
     public Estoque excluir(Estoque estoque) {
+        farmaciaService.consultar(estoque.getCnpj());
+        medicamentoService.consultar(estoque.getNroRegistro());
 
-        Long cnpj = estoque.getCnpj();
-        Farmacia farmacia = farmaciaService.consultar(cnpj);
-        Integer nroRegistro = estoque.getNroRegistro();
-        Medicamento medicamento = medicamentoService.consultar(nroRegistro);
+        if (repo.existsByCnpjAndNroRegistro(estoque.getCnpj(), estoque.getNroRegistro())){
+            Estoque estoqueBD = repo.findByCnpjAndNroRegistro(estoque.getCnpj(), estoque.getNroRegistro());
 
-        if (repo.existsByCnpjAndNroRegistro(cnpj, nroRegistro)){
-            Estoque estoqueBD = repo.findByCnpjAndNroRegistro(cnpj, nroRegistro);
-            var estoqueQtdBD = estoqueBD.getQuantidade();
-
-            if(estoqueQtdBD < estoque.getQuantidade())
+            if(estoqueBD.getQuantidade() < estoque.getQuantidade())
                 throw new QuantidadeIndisponivelException("Estoque", estoque.getQuantidade());
 
             estoque.setQuantidade(estoqueBD.getQuantidade() - estoque.getQuantidade());
             estoque.setDataAtualizacao(LocalDateTime.now());
             estoque = repo.save(estoque);
         }
-
         if(estoque.getQuantidade() == 0)
             repo.delete(estoque);
 
         return estoque;
-
     }
     @Transactional
     public EstoqueTransferenciaResponse atualizar(EstoqueTransferenciaRequest request) {
