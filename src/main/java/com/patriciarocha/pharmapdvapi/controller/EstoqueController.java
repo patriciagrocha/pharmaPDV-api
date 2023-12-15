@@ -40,11 +40,8 @@ public class EstoqueController {
     }
     @GetMapping("/{cnpj}")
     public ResponseEntity<List<EstoqueResponse>> consultar(@PathVariable("cnpj") Long cnpj) {
-        List<EstoqueResponse> estoques = service.consultar(cnpj);
-        List<EstoqueResponse> resp = estoques.stream()
-                .map(estoque -> mapper.map(estoque, EstoqueResponse.class))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(resp);
+        var estoquesCnpj = service.consultar(cnpj);
+        return ResponseEntity.ok(estoquesCnpj);
     }
 
     @PostMapping
