@@ -15,6 +15,7 @@ import java.util.Objects;
 public class Medicamento {
 
     @Id
+    @Column(name = "nro_registro")
     private Integer nroRegistro;
     private String nome;
     private String laboratorio;

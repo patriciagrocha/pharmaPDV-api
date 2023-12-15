@@ -27,7 +27,7 @@ public class FarmaciaService {
 
     public Farmacia consultar(Long cnpj){
         return repo.findById(cnpj)
-                .orElseThrow(() -> new RegistroNaoEncontradoException("Registro", cnpj));
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Farmácia", cnpj));
     }
 
     public Farmacia salvar(Farmacia farmacia){
