@@ -3,8 +3,8 @@
 
 ## 💻 Sobre o projeto
 
-API REST para gerenciar medicamentos, através de um sistema de gestão. 
-Essa API proverá os serviços para a execução do sistema possibilitando manter o cadastro de Farmácias, Medicamentos e seus Estoques com persitência dos dados no banco PostgreSQL.
+API REST para gerenciar farmácias, medicamentos e respectivos estoques, através de um sistema de gestão. 
+Essa API proverá os serviços para a execução do sistema possibilitando manter o cadastro de Farmácias, Medicamentos e seus Estoques com persistência dos dados no banco PostgreSQL.
 
 
 ## 🚧 Funcionalidades
