@@ -9,6 +9,7 @@ Essa API proverá os serviços para a execução do sistema possibilitando mante
 
 ## 🚧 Funcionalidades
 
+- [x] Popular Dados Iniciais: Popula dados iniciais no sistema.
 - [x] Criar Farmácia: Cria uma nova farmácia.
 - [x] Consultar Farmácias: Retorna a lista de todas as farmácias.
 - [x] Consultar Farmácia por CNPJ: Retorna informações sobre uma farmácia específica.
@@ -20,7 +21,12 @@ Essa API proverá os serviços para a execução do sistema possibilitando mante
 - [x] Consultar Estoque por CNPJ: Retorna a lista de itens de estoque para um CNPJ específico.
 - [x] Atualizar Transferência de Estoque: Atualiza a transferência de estoque entre farmácias.
 - [x] Excluir Estoque: Exclui um item de estoque.
-- [x] Popular Dados Iniciais: Popula dados iniciais no sistema.
+
+###  ⏭️ Próximas etapas:
+      
+- [ ] Adicionar camada de segurança.
+- [ ] Desenvolver testes unitários.
+
 
 ## 🛠️ Tecnologias
 Para o desenvolvimento da aplicação, foram utilizadas às tecnologias e dependências abaixo:
